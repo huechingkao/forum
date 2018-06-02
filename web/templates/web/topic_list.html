@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <table>
+        <tr>
+          <th>發起時間</th>
+          <th>討論主題</th>
+          <th>發起人</th>
+          <th>回覆時間</th> 
+          <th>瀏覽次數</th>
+        </tr>
+        {% for topic in  topic_list %}
+        <tr>
+          <td>{{topic.publication_date}}</td>
+          <td><a href="/web/topic/{{topic.id}}">{{topic.subject}}</a></td>
+          <td>{{topic.poster}}</td>
+          <td>{{topic.reply_date}}</td>
+          <td>{{topic.hit}}</td>
+        </tr>
+        {% endfor %}
+  </table>
+    {% load pagination %}
+    {% get_pagination %}
+{% endblock %}

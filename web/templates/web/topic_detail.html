@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %} 
+{% if user.is_authenticated %}
+<a href="/web/topic/{{topic.id}}/delete">刪除討論</a>
+{% endif %}
+<table>
+  <tr><td>發起時間</td><td> {{ topic.publication_date }}</td></tr>
+  <tr><td>發起人</td><td> {{ topic.poster }}</td></tr>  
+  <tr><td>討論主旨</td><td> {{ topic.subject }}</td></tr>
+  <tr><td>討論內容</td><td> {{ topic.content|linebreaks }}</td></tr>
+</table>
+<hr>
+<a href="/web/reply/{{topic.id}}/create">回覆討論</a>
+<hr>
+{% for reply in reply_list %}
+{% if user.is_authenticated %}
+<a href="/web/reply/{{topic.id}}/{{reply.id}}/delete">刪除回覆</a>
+{% endif %}
+<table>
+  <tr><td>回覆時間</td><td> {{ reply.publication_date }}</td></tr>
+  <tr><td>回覆人</td><td> {{ reply.poster }}</td></tr>  
+  <tr><td>回覆內容</td><td> {{ reply.content }}</td></tr>
+</table>
+<hr>
+{% endfor %}
+{% endblock %}
